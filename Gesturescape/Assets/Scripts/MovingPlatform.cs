@@ -8,7 +8,7 @@ public class MovingPlatform : MonoBehaviour
     private WaypointPath _waypointPath;
 
     [SerializeField]
-    private float _speed;
+    private PlatformSettings _speed;
 
     private int _targetWaypointIndex;
 
@@ -25,11 +25,13 @@ public class MovingPlatform : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         _elapsedTime += Time.deltaTime;
         float elapsedPercentage = _elapsedTime / _timeToWaypoint;
-        elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
+
+        //Allows for platforms to move smoothly when reaching a waypoint
+        //elapsedPercentage = Mathf.SmoothStep(0, 1, elapsedPercentage);
 
         transform.position = Vector3.Lerp(_previousWaypoint.position, _targetWaypoint.position, elapsedPercentage);
 
@@ -48,7 +50,7 @@ public class MovingPlatform : MonoBehaviour
         _elapsedTime = 0;
 
         float distanceToWaypoint = Vector3.Distance(_previousWaypoint.position, _targetWaypoint.position);
-        _timeToWaypoint = distanceToWaypoint / _speed;
+        _timeToWaypoint = distanceToWaypoint / _speed.getSpeed();
     }
 
     private void OnTriggerEnter(Collider other)
