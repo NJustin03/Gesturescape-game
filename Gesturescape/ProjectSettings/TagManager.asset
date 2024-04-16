@@ -6,6 +6,7 @@ TagManager:
   tags:
   - SamplesInfoPanel
   - key
+  - door
   layers:
   - Default
   - TransparentFX
