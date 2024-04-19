@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class UnlockDoor : MonoBehaviour
 {
+    public AN_DoorScript doorScript;
     private void OnTriggerEnter(Collider other)
     {
-        if(other.CompareTag("key"))
+        if(other.CompareTag("door"))
         {
             gameObject.SetActive(false);
-            other.gameObject.SetActive(false);
+            doorScript.isOpened = true;
+            //other.gameObject.SetActive(false);
         }
     }
 }
