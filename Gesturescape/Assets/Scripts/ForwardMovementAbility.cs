@@ -4,40 +4,43 @@ using Oculus.Interaction;
 
 public class ForwardMovementAbility : MonoBehaviour
 {
-    public ActiveStateSelector pose;
+    public ActiveStateSelector paperPose;
+    public ActiveStateSelector rockPose;
     public Rigidbody playerRigidBody;
     public Transform cameraTransform; // Reference to the camera's transform
 
     // Movement speed
     public float movementSpeed = 5f;
-
-    // Flag to track whether the pose detection action is active
-    private bool isPoseActive = false;
+    
+    private bool isPaper = false;
 
     void Start()
     {
         // Event trigger for the paper pose
-        pose.WhenSelected += () => StartMovement();
-        pose.WhenUnselected += () => StopMovement();
+        paperPose.WhenSelected += () => StartMovement();
+
+        // Event trigger for the rock pose
+        rockPose.WhenSelected += () => StopMovement();
     }
 
     // Method to start movement
     void StartMovement()
     {
-        isPoseActive = true;
+        isPaper = true;
         StartCoroutine(MovePlayer());
     }
 
     // Method to stop movement
     void StopMovement()
     {
-        isPoseActive = false;
+        isPaper = false;
+        StopCoroutine(MovePlayer());
     }
 
     // Coroutine to handle movement
     IEnumerator MovePlayer()
     {
-        while (isPoseActive)
+        while (isPaper)
         {
             // Calculate movement direction relative to the camera
             Vector3 movementDirection = cameraTransform.forward;
