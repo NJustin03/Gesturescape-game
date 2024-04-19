@@ -16,23 +16,24 @@ public class GlaciusAbility : MonoBehaviour
 
     void Start()
     {
-        //Event trigger the bunny pose
-        pose.WhenSelected += () =>
-        {
-            if (!isCooldown)
-            {
-                // Preform action that causes the rigidbody to be boosted
-                platformSpeed.speed = 5f;
-                StartCoroutine(StartCooldown());
-                
-            }
-        };
-
+        //Event trigger the clock pose
+        pose.WhenSelected += StartCooldown;
         pose.WhenUnselected += () => Debug.Log("");
     }
 
-    // Coroutine to handle cooldown
-    IEnumerator StartCooldown()
+    // Start the cooldown for all platforms
+    void StartCooldown()
+    {
+        if (!isCooldown)
+        {
+            // Preform action that causes the platforms to slow down.
+            platformSpeed.speed = 5f;
+            StartCoroutine(ResetSpeedAfterCooldown());
+        }
+    }
+
+    // Coroutine to reset speed after cooldown
+    IEnumerator ResetSpeedAfterCooldown()
     {
         // Set the flag to indicate that the action is on cooldown
         isCooldown = true;
