@@ -7,6 +7,7 @@ public class GlaciusAbility : MonoBehaviour
 {
     public ActiveStateSelector pose;
     public PlatformSettings platformSpeed;
+    public MovingWallSettings movingWallSpeed;
 
     // Cooldown duration in seconds
     public float cooldownDuration = 10f;
@@ -28,6 +29,7 @@ public class GlaciusAbility : MonoBehaviour
         {
             // Preform action that causes the platforms to slow down.
             platformSpeed.speed = 5f;
+            movingWallSpeed.speed = 1f;
             StartCoroutine(ResetSpeedAfterCooldown());
         }
     }
@@ -43,6 +45,7 @@ public class GlaciusAbility : MonoBehaviour
 
         // Reset the cooldown flag after cooldown duration
         platformSpeed.speed = 50f;
+        movingWallSpeed.speed = 5f;
         isCooldown = false;
     }
 }
