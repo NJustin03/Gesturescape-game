@@ -7,6 +7,8 @@ TagManager:
   - SamplesInfoPanel
   - key
   - door
+  - fire
+  - hiddenText
   layers:
   - Default
   - TransparentFX
