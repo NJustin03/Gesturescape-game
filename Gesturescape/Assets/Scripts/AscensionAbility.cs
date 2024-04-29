@@ -11,6 +11,7 @@ public class AscensionAbility : MonoBehaviour
 
     // Cooldown duration in seconds
     public float cooldownDuration = 2f;
+    public AudioSource windSound;
 
     // Flag to track whether the pose detection action is on cooldown
     private bool isCooldown = false;
@@ -24,6 +25,7 @@ public class AscensionAbility : MonoBehaviour
             {
                 // Preform action that causes the rigidbody to be boosted
                 playerRigidBody.AddForce(Vector3.up * 10f, ForceMode.Impulse);
+                windSound.Play();
                 StartCoroutine(StartCooldown());
             }
         };
